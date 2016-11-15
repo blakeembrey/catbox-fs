@@ -1,0 +1,50 @@
+{
+  "name": "catbox-fs",
+  "version": "0.0.0",
+  "description": "Filesystem adapter for catbox",
+  "main": "dist/index.js",
+  "files": [
+    "dist/",
+    "typings.json"
+  ],
+  "scripts": {
+    "lint": "tslint \"src/**/*.ts\"",
+    "build": "rm -rf dist/ && tsc",
+    "test-cov": "jest --coverage",
+    "test": "npm run build && npm run lint && npm run test-cov",
+    "prepublish": "typings install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/blakeembrey/catbox-fs.git"
+  },
+  "keywords": [
+    "catbox",
+    "adapter",
+    "fs",
+    "filesystem"
+  ],
+  "author": {
+    "name": "Blake Embrey",
+    "email": "hello@blakeembrey.com",
+    "url": "http://blakeembrey.me"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blakeembrey/catbox-fs/issues"
+  },
+  "homepage": "https://github.com/blakeembrey/catbox-fs",
+  "devDependencies": {
+    "catbox": "^7.1.2",
+    "jest": "^17.0.1",
+    "rimraf": "^2.5.4",
+    "tslint": "^3.15.1",
+    "tslint-config-standard": "^1.5.0",
+    "typescript": "^2.0.9",
+    "typings": "^2.0.0"
+  },
+  "dependencies": {
+    "lockfile": "^1.0.2",
+    "mkdirp": "^0.5.1"
+  }
+}

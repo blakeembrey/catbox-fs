@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "lockfile": "registry:npm/lockfile#1.0.0+20160723033700",
+    "mkdirp": "registry:npm/mkdirp#0.5.0+20160723033700"
+  },
+  "globalDependencies": {
+    "node": "registry:env/node#6.0.0+20161105011511"
+  },
+  "globalDevDependencies": {
+    "jest": "registry:dt/jest#16.0.0+20161025131017"
+  },
+  "devDependencies": {
+    "catbox": "registry:npm/catbox#7.0.0+20161115004947",
+    "rimraf": "registry:npm/rimraf#2.5.0+20160723033700"
+  }
+}
