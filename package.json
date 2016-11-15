@@ -1,6 +1,6 @@
 {
   "name": "catbox-fs",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Filesystem adapter for catbox",
   "main": "dist/index.js",
   "files": [
