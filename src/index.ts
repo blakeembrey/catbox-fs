@@ -13,6 +13,7 @@ class FsCache <T> {
   trimInterval: number
   timer: NodeJS.Timer | undefined
   expires: { [path: string]: number } = {}
+  isClearing = false
 
   constructor (options: FsCache.Options<T> = {}) {
     this.directory = options.directory || join(tmpdir(), 'catbox-fs')
@@ -40,24 +41,45 @@ class FsCache <T> {
   }
 
   clear () {
+    // Reading files may take more than our interval duration.
+    if (this.isClearing) {
+      return
+    }
+
+    this.isClearing = true
+
     return readdir(this.directory, (err, files) => {
       if (err) {
+        this.isClearing = false
         return
       }
 
       const now = Date.now()
-      const oldExpires = this.expires
+      const prevExpires = this.expires
+      let len = files.length
 
       // Reset the expiration object to automatically trim unlinked files
       // controlled by a different `catbox-fs` instance.
       this.expires = {}
 
       // Execute every callback to handle trimming all entries.
-      const trim = (path: string, expiration: number) => {
-        // Update the expiration date or set it for a future attempt.
+      const trim = (path: string, expiration?: number) => {
+        len--
+
+        // Remove the `isClearing` block when all files are processed.
+        if (len === 0) {
+          this.isClearing = false
+        }
+
+        // Skip null expirations.
+        if (expiration == null) {
+          return
+        }
+
+        // Unlink expired documents, or set it for a future attempt.
         if (expiration < now) {
           this.unlink(path, () => undefined)
-        } else {
+        } else if (!this.expires[path]) {
           this.expires[path] = expiration
         }
       }
@@ -66,20 +88,22 @@ class FsCache <T> {
         const path = join(this.directory, file)
 
         // Skip known file expiration.
-        if (oldExpires[path]) {
-          return trim(path, oldExpires[path])
+        if (this.expires[path] || prevExpires[path]) {
+          return trim(path, this.expires[path] || prevExpires[path])
         }
 
         return readFile(path, 'utf8', (err, data) => {
           if (err) {
-            return
+            return trim(path)
           }
 
           try {
             const result = JSON.parse(data)
 
             return trim(path, result.stored + this.toTtl(result.ttl))
-          } catch (e) { /* Ignore errors. */ }
+          } catch (e) {
+            return trim(path, 0)
+          }
         })
       })
     })
