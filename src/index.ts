@@ -1,3 +1,4 @@
+import { createHash } from 'crypto'
 import { tmpdir } from 'os'
 import { join } from 'path'
 import { readdir, readFile, writeFile, unlink } from 'fs'
@@ -97,7 +98,7 @@ class FsCache <T> {
   }
 
   encodeFileName (name: string) {
-    return encodeURIComponent(name).replace(/%/g, '_')
+    return createHash('sha512').update(name).digest('hex')
   }
 
   toTtl (value: number) {
