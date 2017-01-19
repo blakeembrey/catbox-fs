@@ -110,11 +110,11 @@ class FsCache <T> {
   }
 
   validateSegmentName (name: string): Error | null {
-     if (!name) {
-       return new TypeError('Empty string')
-     }
+    if (!name) {
+      return new TypeError('Empty string')
+    }
 
-     return null
+    return null
   }
 
   toCachePath (key: FsCache.Key) {
