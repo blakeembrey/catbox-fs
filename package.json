@@ -38,7 +38,7 @@
     "catbox": "^7.1.2",
     "jest": "^19.0.1",
     "rimraf": "^2.5.4",
-    "tslint": "^4.0.2",
+    "tslint": "^5.0.0",
     "tslint-config-standard": "^3.0.0",
     "typescript": "^2.0.9",
     "typings": "^2.0.0"
