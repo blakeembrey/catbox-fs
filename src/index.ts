@@ -72,7 +72,7 @@ class FsCache <T> {
         }
 
         // Skip null expirations.
-        if (expiration == null) {
+        if (expiration === undefined) {
           return
         }
 
@@ -125,7 +125,7 @@ class FsCache <T> {
     return createHash('sha512').update(name).digest('hex')
   }
 
-  toTtl (value: number) {
+  toTtl (value: number | undefined) {
     return typeof value === 'number' ? value : Infinity
   }
 

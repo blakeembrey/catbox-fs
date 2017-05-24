@@ -8,8 +8,8 @@
     "typings.json"
   ],
   "scripts": {
-    "lint": "tslint \"src/**/*.ts\"",
-    "build": "rm -rf dist/ && tsc",
+    "lint": "tslint \"src/**/*.ts\" --project tsconfig.json --type-check",
+    "build": "rimraf dist/ && tsc",
     "test-cov": "jest --coverage",
     "test": "npm run build && npm run lint && npm run test-cov",
     "prepublish": "typings install && npm run build"
@@ -38,9 +38,9 @@
     "catbox": "^7.1.2",
     "jest": "^20.0.0",
     "rimraf": "^2.5.4",
-    "tslint": "^5.0.0",
-    "tslint-config-standard": "^5.0.0",
-    "typescript": "^2.0.9",
+    "tslint": "^5.3.2",
+    "tslint-config-standard": "^5.0.2",
+    "typescript": "^2.3.3",
     "typings": "^2.0.0"
   },
   "dependencies": {
