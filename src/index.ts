@@ -15,7 +15,7 @@ class FsCache <T> {
   expires: { [path: string]: number } = {}
   isClearing = false
 
-  constructor (options: FsCache.Options<T> = {}) {
+  constructor (options: FsCache.Options = {}) {
     this.directory = options.directory || join(tmpdir(), 'catbox-fs')
     this.trimInterval = options.trimInterval || 30000 // 30 secs.
   }
@@ -214,7 +214,7 @@ class FsCache <T> {
 }
 
 namespace FsCache {
-  export interface Options <T> {
+  export interface Options {
     directory?: string
     trimInterval?: number
   }
