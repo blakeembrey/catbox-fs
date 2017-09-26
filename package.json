@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/blakeembrey/catbox-fs",
   "devDependencies": {
-    "catbox": "^7.1.2",
+    "catbox": "^8.0.0",
     "jest": "^21.0.0",
     "rimraf": "^2.5.4",
     "tslint": "^5.3.2",
